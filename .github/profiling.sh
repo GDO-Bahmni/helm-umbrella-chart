@@ -27,7 +27,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: profiling.lite.mybahmni.in
+    - host: profiling.gdo.bahmni.in
       http:
         paths:
           - path: /
