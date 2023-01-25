@@ -54,13 +54,13 @@ jobs:
         run: aws eks update-kubeconfig --name $CLUSTER_NAME
       - name: Install Nginx Ingress
         run: |
+          helm upgrade ingress-nginx ingress-nginx \
+          --repo https://kubernetes.github.io/ingress-nginx \
+          --namespace=ingress-nginx --create-namespace \
+          --install \
+          --set 'controller.service.annotations.service\.beta\.kubernetes\.io\/aws-load-balancer-ssl-cert'=${{ secrets.MYBAHMNI_CERT_ARN }} \
+          --values=values/ingress_config.yaml 
           kubectl apply -f custom-error-pages/custom-error.yaml -n ingress-nginx
-  #         helm upgrade ingress-nginx ingress-nginx \
-  #         --repo https://kubernetes.github.io/ingress-nginx \
-  #         --namespace=ingress-nginx --create-namespace \
-  #         --install \
-  #         --set 'controller.service.annotations.service\.beta\.kubernetes\.io\/aws-load-balancer-ssl-cert'=${{ secrets.MYBAHMNI_CERT_ARN }} \
-  #         --values=values/ingress_config.yaml 
   #     - name: Upsert Route53 A record with INGRESS_DNS
   #       run: |
   #         INGRESS_DNS=$(kubectl -n ingress-nginx  get svc ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].hostname}")
