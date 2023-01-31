@@ -72,26 +72,26 @@ jobs:
       - name: Setup Environment secrets
         shell: bash
         run: bash .github/setupEnvSecrets.sh ${{ env.ENVIRONMENT }}
-  #     - name: Setup databases
-  #       if: ${{ github.event.inputs.enable_db_setup == 'true' }}
-  #       run: |
-  #         helm install db-setup db-setup --repo https://bahmni.github.io/helm-charts --devel --wait --wait-for-jobs --atomic --timeout 1m \
-  #         --namespace ${{ env.ENVIRONMENT }} --create-namespace \
-  #         --set DB_HOST=$RDS_HOST \
-  #         --set DB_ROOT_USERNAME=$RDS_USERNAME \
-  #         --set DB_ROOT_PASSWORD=$RDS_PASSWORD \
-  #         --set databases.openmrs.DB_NAME=openmrs_${{ env.ENVIRONMENT }} \
-  #         --set databases.openmrs.USERNAME=$OPENMRS_DB_USERNAME \
-  #         --set databases.openmrs.PASSWORD=$OPENMRS_DB_PASSWORD \
-  #         --set databases.crater.DB_NAME=crater_${{ env.ENVIRONMENT }} \
-  #         --set databases.crater.USERNAME=$CRATER_DB_USERNAME \
-  #         --set databases.crater.PASSWORD=$CRATER_DB_PASSWORD \
-  #         --set databases.crater_atomfeed.DB_NAME=crater_atomfeed_${{ env.ENVIRONMENT }} \
-  #         --set databases.crater_atomfeed.USERNAME=$CRATER_ATOMFEED_DB_USERNAME \
-  #         --set databases.crater_atomfeed.PASSWORD=$CRATER_ATOMFEED_DB_PASSWORD \
-  #         --set databases.reports.DB_NAME=bahmni_reports_${{ env.ENVIRONMENT }} \
-  #         --set databases.reports.USERNAME=$REPORTS_DB_USERNAME \
-  #         --set databases.reports.PASSWORD=$REPORTS_DB_PASSWORD
+      - name: Setup databases
+        if: ${{ github.event.inputs.enable_db_setup == 'true' }}
+        run: |
+          helm install db-setup db-setup --repo https://bahmni.github.io/helm-charts --devel --wait --wait-for-jobs --atomic --timeout 1m \
+          --namespace ${{ env.ENVIRONMENT }} --create-namespace \
+          --set DB_HOST=$RDS_HOST \
+          --set DB_ROOT_USERNAME=$RDS_USERNAME \
+          --set DB_ROOT_PASSWORD=$RDS_PASSWORD \
+          --set databases.openmrs.DB_NAME=openmrs_${{ env.ENVIRONMENT }} \
+          --set databases.openmrs.USERNAME=$OPENMRS_DB_USERNAME \
+          --set databases.openmrs.PASSWORD=$OPENMRS_DB_PASSWORD \
+          --set databases.crater.DB_NAME=crater_${{ env.ENVIRONMENT }} \
+          --set databases.crater.USERNAME=$CRATER_DB_USERNAME \
+          --set databases.crater.PASSWORD=$CRATER_DB_PASSWORD \
+          --set databases.crater_atomfeed.DB_NAME=crater_atomfeed_${{ env.ENVIRONMENT }} \
+          --set databases.crater_atomfeed.USERNAME=$CRATER_ATOMFEED_DB_USERNAME \
+          --set databases.crater_atomfeed.PASSWORD=$CRATER_ATOMFEED_DB_PASSWORD \
+          --set databases.reports.DB_NAME=bahmni_reports_${{ env.ENVIRONMENT }} \
+          --set databases.reports.USERNAME=$REPORTS_DB_USERNAME \
+          --set databases.reports.PASSWORD=$REPORTS_DB_PASSWORD
 
   #     - name: Deleting db-setup helm release
   #       if: ${{ github.event.inputs.enable_db_setup == 'true' }}
