@@ -69,9 +69,6 @@ jobs:
              '.Changes[].ResourceRecordSet.AliasTarget.DNSName = $ingress_dns | .Changes[0].ResourceRecordSet.Name = $environment_dns | .Changes[1].ResourceRecordSet.Name = "payments-"+$environment_dns' \
               aws/route53/gdobahmni.click.json > recordset
           aws route53 change-resource-record-sets --hosted-zone-id ${{ secrets.HOSTED_ZONE_ID }} --change-batch file://recordset
-      - name: Setup Environment secrets
-        shell: bash
-        run: bash .github/setupEnvSecrets.sh ${{ env.ENVIRONMENT }}
       - name: Setup databases
         if: ${{ github.event.inputs.enable_db_setup == 'true' }}
         run: |
@@ -92,7 +89,9 @@ jobs:
           --set databases.reports.DB_NAME=bahmni_reports_${{ env.ENVIRONMENT }} \
           --set databases.reports.USERNAME=$REPORTS_DB_USERNAME \
           --set databases.reports.PASSWORD=$REPORTS_DB_PASSWORD
-
+      - name: Setup Environment secrets
+        shell: bash
+        run: bash .github/setupEnvSecrets.sh ${{ env.ENVIRONMENT }}
   #     - name: Deleting db-setup helm release
   #       if: ${{ github.event.inputs.enable_db_setup == 'true' }}
   #       run: helm uninstall db-setup --namespace ${{ env.ENVIRONMENT }}
