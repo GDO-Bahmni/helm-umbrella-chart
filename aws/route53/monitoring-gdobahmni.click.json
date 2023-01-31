@@ -4,7 +4,7 @@
     {
       "Action": "UPSERT",
       "ResourceRecordSet": {
-        "Name": "monitoring-gdo.bahmni.in.",
+        "Name": "monitoring-gdobahmni.click.",
         "Type": "A",
         "AliasTarget": {
           "HostedZoneId": "ZVDDRBQ08TROA",

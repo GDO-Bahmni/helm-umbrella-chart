@@ -3,11 +3,11 @@ grafana:
     enabled: true
     ingressClassName: nginx
     hosts:
-      - monitoring-gdo.bahmni.in
+      - monitoring-gdobahmni.click
   defaultDashboardsTimezone: browser
   grafana.ini:
     server:
-      root_url: https://monitoring-gdo.bahmni.in
+      root_url: https://monitoring-gdobahmni.click
     auth.github:
       enabled: true
       allow_sign_up: true

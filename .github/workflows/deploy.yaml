@@ -26,7 +26,7 @@ on:
           - performance
 env:
   ENVIRONMENT: ${{ github.event.inputs.environment || 'dev'}}
-  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'gdo.bahmni.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'gdo.bahmni.in') }}
+  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'gdobahmni.click' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'gdobahmni.click') }}
 
 jobs:
   deploy:
@@ -34,7 +34,7 @@ jobs:
     concurrency: ${{ github.event.inputs.environment || 'dev'}}
     environment:
       name: ${{ github.event.inputs.environment || 'dev'}}
-      url: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'gdo.bahmni.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'gdo.bahmni.in') }}
+      url: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'gdobahmni.click' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'gdobahmni.click') }}
     runs-on: ubuntu-latest
     env:
       CLUSTER_NAME: bahmni-cluster-nonprod
@@ -67,7 +67,7 @@ jobs:
           jq --arg ingress_dns "$INGRESS_DNS" \
              --arg environment_dns "$ENVIRONMENT_DNS" \
              '.Changes[].ResourceRecordSet.AliasTarget.DNSName = $ingress_dns | .Changes[0].ResourceRecordSet.Name = $environment_dns | .Changes[1].ResourceRecordSet.Name = "payments-"+$environment_dns' \
-              aws/route53/gdo.bahmni.in.json > recordset
+              aws/route53/gdobahmni.click.json > recordset
           aws route53 change-resource-record-sets --hosted-zone-id ${{ secrets.HOSTED_ZONE_ID }} --change-batch file://recordset
       - name: Setup Environment secrets
         shell: bash
