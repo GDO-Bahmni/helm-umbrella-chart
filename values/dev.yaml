@@ -124,3 +124,9 @@ bahmni-mart:
     MART_DB_NAME: martdb
   secrets:
     MART_DB_HOST: "bahmni-dev-postgresql"
+
+clinic-config:
+  enabled: true
+  image:
+    repository: deepti1598
+    tag: latest
