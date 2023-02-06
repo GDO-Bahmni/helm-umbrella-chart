@@ -133,3 +133,4 @@ clinic-config:
   image:
     repository: deepti1598
     tag: latest
+    imagePullPolicy: Always
