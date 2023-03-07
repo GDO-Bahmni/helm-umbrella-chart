@@ -135,3 +135,10 @@ clinic-config:
     repository: deepti1598
     tag: latest
     imagePullPolicy: Always
+
+openmrsdb:
+  enabled: true
+  image:
+    repository: deepti1598
+    tag: dev
+    imagePullPolicy: Always

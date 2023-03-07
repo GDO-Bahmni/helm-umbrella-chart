@@ -57,7 +57,7 @@ spec:
               value: root
             - name: MYSQL_USER
               value: openmrs-user
-          image: mysql:5.7
+          image: openmrsdb5.6
           name: openmrsdb
           ports:
             - containerPort: 3306
