@@ -142,3 +142,6 @@ openmrsdb:
     repository: deepti1598
     tag: dev
     imagePullPolicy: Always
+
+odoo:
+  enabled: true
